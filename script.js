@@ -46,12 +46,12 @@ const questionnaire = [{
       }
     ]
 },{
-    "question": "If you were a cat, what would make you sure that you are actually a cat, and not, say, a bald eagle?",
+    "question": "Say you are a cat. How do you convince me you actually are a cat, and not some bird or human?",
     "name":"drink",
     "answers": [
       {
         value: 2,
-        label: "Never met my dad, but my mom is one big fluff. So yeah, pretty sure."
+        label: "Never met my dad, but my mom is one big fluff. So yeah, I'm pretty sure."
       },{
         value: 3,
         label: "I wonder if i fit in that box... What was the question?"
@@ -135,7 +135,7 @@ function renderForm() {
     options.append(a,l,"<br>");
   }
 
-  let b = $("<button></button>").attr("type","submit").text("MEOW").click((e) => {
+  let b = $("<button></button>").attr("type","submit").text("Next").click((e) => {
     if (selectedVal === "") {
       e.preventDefault();
       alert("You must select an answer first!");
@@ -153,7 +153,7 @@ function renderForm() {
     }
   });
 
-  let f = $("<form></form>").attr("method","POST").append(h3,options,b);
+  let f = $("<form></form>").attr("method","POST").append(h3,"<br>",options,b);
   $("body").append(f);
 }
 

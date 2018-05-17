@@ -484,7 +484,7 @@ select {
 
 button {
   font-size: 32px;
-  padding: 30px;
+  padding: 20px;
   margin: 30px;
   display:flex;
   justify-content: center;
@@ -494,6 +494,7 @@ button {
           appearance: none;
   border: 0;
   border-radius: 3px;
+  width: 225px;
   background-color: #FFEDE1;
   color: #7D4F50;
   line-height: 1;
