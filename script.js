@@ -1,4 +1,4 @@
-//import { questionnaire } from "./questionnaire.js";
+//import questionnaire from "./questionnaire.js";
 
 const questionnaire = [{
     "question": "What is your comfort food?",
@@ -85,7 +85,10 @@ function onStart() {
   let start = $("<button></button>").attr({
     "id":"start",
     "type":"submit"
-  }).text("START").click(() => renderForm());
+  }).text("START").click(() => {
+    $("body").empty();
+    renderForm();
+  });
 
   $("body").append(h1,start);
 }
@@ -97,7 +100,7 @@ function onReset() {
   let reset = $("<button></button>").attr({
     "id":"reset",
     "type":"submit"
-  }).text("DO IT AGAIN").click(() => {
+  }).text("GO AGAIN").click(() => {
     reset.remove();
     currentQuestion = 0;
     $("body").empty();
@@ -118,6 +121,7 @@ function renderForm() {
   let options = $("<div></div>").attr("class", ".answer-options");
   for (let answer of questionnaire[currentQuestion].answers) {
     let a = $("<input></input>").attr({
+      "id":answer.value,
       "name":questionnaire[currentQuestion].name,
       "type":"radio",
       "value":answer.value
@@ -127,11 +131,11 @@ function renderForm() {
         selectedVal = currentEl.value;
       }
     });
-    let l = $("<label></label>").text(answer.label);
-    options.append(a,l);
+    let l = $("<label></label>").text(answer.label).attr("for",answer.value);
+    options.append(a,l,"<br>");
   }
 
-  let b = $("<button></button>").attr("type","submit").text("ROGER").click((e) => {
+  let b = $("<button></button>").attr("type","submit").text("MEOW").click((e) => {
     if (selectedVal === "") {
       e.preventDefault();
       alert("You must select an answer first!");
@@ -150,7 +154,7 @@ function renderForm() {
   });
 
   let f = $("<form></form>").attr("method","POST").append(h3,options,b);
-  $("body").append(h1,f);
+  $("body").append(f);
 }
 
 function renderResults() {
@@ -159,8 +163,8 @@ function renderResults() {
   let url = "";
   let alt = "";
 
-  if (rating < 6) {
-    type = "Well, you are the one with some Cattitude!"
+  if (rating < 7) {
+    type = "Well you are one with some Cattitude!"
     url = "https://cdn.images.express.co.uk/img/dynamic/80/590x/Grumpy-Cat-on-bed-544409.jpg";
     alt = "Purring intensifies";
   } else if (rating > 9) {
@@ -180,7 +184,7 @@ function renderResults() {
     "title":alt
   });
 
-  $("body").append(h1,h2,image);
+  $("body").append(h2,image);
 }
 
 $(onStart());
